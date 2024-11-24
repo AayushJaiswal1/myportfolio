@@ -32,9 +32,9 @@ pipeline {
         withCredentials([string(credentialsId: 'docker-hub-token', variable: 'DOCKER_TOKEN')]) {
             script {
                 sh '''
-                echo "${DOCKER_TOKEN}" | docker login -u your-dockerhub-username --password-stdin
-                docker tag nginx-portfolio your-dockerhub-username/nginx-portfolio:latest
-                docker push your-dockerhub-username/nginx-portfolio:latest
+                echo "${DOCKER_TOKEN}" | docker login -u aayushaj112 --password-stdin
+                docker tag nginx-portfolio aayushaj112/nginx-portfolio:latest
+                docker push aayushaj112/nginx-portfolio:latest
                 '''
             }
         }
