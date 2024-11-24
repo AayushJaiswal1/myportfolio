@@ -27,21 +27,19 @@ pipeline {
                 }
             }
         }
-stage('Push to Docker Hub') {
+        stage('Push to Docker Hub') {
     steps {
         withCredentials([string(credentialsId: 'docker-hub-token', variable: 'DOCKER_TOKEN')]) {
-            sh """
-            echo "${DOCKER_TOKEN}" | docker login -u your-dockerhub-username --password-stdin
-            docker tag ${DOCKER_IMAGE} your-dockerhub-username/${DOCKER_IMAGE}:latest
-            docker push your-dockerhub-username/${DOCKER_IMAGE}:latest
-            """
+            script {
+                sh '''
+                echo "${DOCKER_TOKEN}" | docker login -u your-dockerhub-username --password-stdin
+                docker tag nginx-portfolio your-dockerhub-username/nginx-portfolio:latest
+                docker push your-dockerhub-username/nginx-portfolio:latest
+                '''
+            }
         }
     }
 }
-
- 
-
-
         stage('Deploy to Production') {
             steps {
                 script {
