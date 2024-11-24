@@ -22,6 +22,7 @@ pipeline {
             steps {
                 script {
                     sh "docker stop nginx-portfolio-container"
+                    sh "docker rm nginx-portfolio-container"
                     sh "docker run --rm -d --name ${DOCKER_CONTAINER} -p 8081:80 ${DOCKER_IMAGE}"
                     sh "sleep 5"  // Give the container time to start
                     sh "curl -f http://localhost:8081 || exit 1"
